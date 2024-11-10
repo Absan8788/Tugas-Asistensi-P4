@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <string.h>
+
+// Struct untuk karakter Pegawai (Manusia)
+struct Pegawai {
+    char name[20];
+    int energy;
+    int loves;
+};
+
+// Struct untuk karakter Pet (Hewan)
+struct Pet {
+    char name[20];
+    int energy;
+    int loves;
+};
+
+//Fungsi untuk menampilkan atribut karakter Pegawai
+void showAttributesPegawai(struct Pegawai pegawai) {
+    printf("Nama: %s\nAbsan's Energy: %d\nAbsan's Loves: %d\n", pegawai.name, pegawai.energy, pegawai.loves);
+}
+
+//Fungsi untuk menampilkan atribut karakter Pet
+void showAttributesPet(struct Pet pet) {
+    printf("Nama: %s\nTiger's Energy: %d\nTiger's Loves: %d\n", pet.name, pet.energy, pet.loves);
+}
+
+//Fungsi untuk melakukan aktivitas pada karakter Pegawai
+void pettingPegawai(struct Pegawai *pegawai) {
+    pegawai->loves += 10;
+    printf("%s is happy! Loves increased to %d\n", pegawai->name, pegawai->loves);
+}
+
+// Fungsi untuk melakukan aktivitas pada karakter Pet
+void pettingPet(struct Pet *pet) {
+    pet->loves += 10;
+    printf("%s is happy! Loves increased to %d\n", pet->name, pet->loves);
+}
+
+int main() {
+    struct Pegawai absan = {"Absan", 100, 50};
+    struct Pet tiger = {"Tiger", 80, 60};
+
+    char command[20];
+    while (1) {
+        printf("Masukkan perintah: ");
+        gets(command);
+
+        if (strcmp(command, "QUIT") == 0) break;
+
+        // Perintah untuk menampilkan atribut Pegawai
+        if (strcmp(command, "ATTR ABSAN") == 0) {
+            showAttributesPegawai(absan);
+        }
+        // Perintah untuk menampilkan atribut Pet
+        else if (strcmp(command, "ATTR TIGER") == 0) {
+            showAttributesPet(tiger);
+        }
+        // Perintah untuk melakukan aktivitas Petting pada Pegawai
+        else if (strcmp(command, "PETTING ABSAN") == 0) {
+            pettingPegawai(&absan);
+        }
+        // Perintah untuk melakukan aktivitas Petting pada Pet
+        else if (strcmp(command, "PETTING TIGER") == 0) {
+            pettingPet(&tiger);
+        }
+        else {
+            printf("Perintah tidak dikenali.\n");
+        }
+    }
+    return 0;
+}
